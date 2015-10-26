@@ -1,1 +1,1 @@
-web: gunicorn herokuplay.wsgi --log-file -
+web: gunicorn fitter_api.wsgi --log-file -
