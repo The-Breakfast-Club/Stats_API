@@ -11,5 +11,5 @@ class Activity(models.Model):
 
 class Stats(models.Model):
     activity = models.ForeignKey(Activity)
-    number_of = models.SmallPositiveIntegerField()
+    number_of = models.PositiveSmallIntegerField()
     date = models.DateTimeField(auto_now_add=True)
