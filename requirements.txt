@@ -15,3 +15,4 @@ djangorestframework==3.2.4
 django-rest-swagger==0.3.4
 PyYAML==3.11
 requests==2.8.1
+django-cors-headers==1.1.0
