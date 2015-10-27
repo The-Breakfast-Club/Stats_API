@@ -10,5 +10,5 @@ class ActivityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows activities to be viewed or edited
     """
-    queryset = Activity.objects.all().order_by('-date_created')
+    queryset = Activity.objects.all().order_by('-date')
     serializer_class = ActivitySerializer
