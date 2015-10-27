@@ -16,10 +16,17 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from api import views
+from rest_framework import routers
 
+router = routers.SimpleRouter()
+router.register(r'activities', views.ActivityViewSet)
+router.register(r'stats', views.StatsViewSet)
+router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.hello),
-
+    url(r'^', include(router.urls)),
+    url(r'^api-auth', include('rest_framework.urls',
+                              namespace='rest_framework')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
 ]
