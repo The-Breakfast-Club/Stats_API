@@ -2,7 +2,7 @@ from .settings import *
 import os
 import dj_database_url
 
-DEBUG = bool(int(os.environ.get('DEBUG', False)))
+DEBUG = bool(int(os.environ.get('DEBUG', True)))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 BLACKLIST_APPS = ['debugtoolbar', 'django_extensions']
@@ -14,7 +14,7 @@ DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
-# 
+#
 # # Static asset configuration
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # STATIC_ROOT = 'staticfiles'
