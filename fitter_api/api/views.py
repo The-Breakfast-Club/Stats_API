@@ -50,5 +50,5 @@ class StatsViewSet(viewsets.ModelViewSet):
         context['activity_pk'] = self.kwargs['activity_pk']
         return context
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
