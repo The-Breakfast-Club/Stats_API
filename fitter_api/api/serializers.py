@@ -16,6 +16,13 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class StatsSerializer(serializers.HyperlinkedModelSerializer):
+    activity_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True, source="activity")
+
     class Meta:
         model = Stats
-        fields = ('url', 'id', 'activity', 'number_of', 'date')
+        fields = ('url', 'id', 'activity_id', 'number_of', 'date')
+
+    def create(self, validated_data):
+        validated_data['activity_id'] = self.context['activity_pk']
+        stat = Stats.objects.create(**validated_data)
+        return stat

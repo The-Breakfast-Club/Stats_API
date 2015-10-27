@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from .models import Activity, Stats
@@ -6,6 +6,7 @@ from api.serializers import ActivitySerializer, StatsSerializer, UserSerializer
 from django.http.response import HttpResponse
 
 # Create your views here.
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -22,6 +23,12 @@ class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all().order_by('-date')
     serializer_class = ActivitySerializer
 
+    def get_serializer_class(self):
+        return ActivitySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class StatsViewSet(viewsets.ModelViewSet):
     """
@@ -29,3 +36,16 @@ class StatsViewSet(viewsets.ModelViewSet):
     """
     queryset = Stats.objects.all().order_by('-date')
     serializer_class = StatsSerializer
+
+    def get_queryset(self):
+        activity_pk = self.kwargs['activity_pk']
+        get_object_or_404(Activity, pk=activity_pk)
+        return self.queryset.filter(activity_id=activity_pk)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context().copy()
+        context['activity_pk'] = self.kwargs['activity_pk']
+        return context
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
