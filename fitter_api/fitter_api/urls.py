@@ -21,7 +21,7 @@ from rest_framework import routers
 router = routers.SimpleRouter()
 router.register(r'activities', views.ActivityViewSet)
 router.register(r'stats', views.StatsViewSet)
-router.register(r'accounts', views.UserViewSet)
+router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

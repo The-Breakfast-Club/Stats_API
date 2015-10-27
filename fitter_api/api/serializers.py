@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'date_joined')
+        fields = ('url', 'username', 'id', 'date_joined')
 
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
@@ -18,4 +18,4 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
 class StatsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Stats
-        fields = ('id', 'activity', 'number_of', 'date')
+        fields = ('url', 'id', 'activity', 'number_of', 'date')
