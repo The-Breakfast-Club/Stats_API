@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 
 class StatsSerializer(serializers.HyperlinkedModelSerializer):
-    activity_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True, source="activity")
+    activity_id = serializers.PrimaryKeyRelatedField(many=False,
+                                                     read_only=True,
+                                                     source="activity")
     # fit_user = serializers.StringRelatedField(read_only=True, source='user')
 
     class Meta:
@@ -20,13 +22,24 @@ class StatsSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'id', 'date_joined')
+        fields = ('username', 'id', 'password')
+        extra_kwargs = {'username': {'write_only': True},
+                        'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User(
+            username=validated_data['username']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
 
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-        fields = ('url', 'id', 'title', 'units', 'date')
+        fields = ('id', 'title', 'units', 'date')
 
 
 class ActivityDetailSerializer(ActivitySerializer):
