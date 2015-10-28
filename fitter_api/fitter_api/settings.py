@@ -87,7 +87,7 @@ DATABASES = {
         'USER': 'fitter_api',
         'PASSWORD': 'password',
         'HOST': '',
-        'PORT': '',    }
+        'PORT': '', }
 }
 
 
@@ -134,11 +134,11 @@ REST_FRAMEWORK = {
 
 
 if DEBUG:
-    CORS_ORIGIN_ALLOW_ALL = True #while testing#
+    CORS_ORIGIN_ALLOW_ALL = True  # while testing#
 else:
     CORS_ORIGIN_ALLOW_ALL = False
 #   CORS_ORIGIN_WHITELIST = (
 #             'firebase thing'
 # )
 
-CORS_ALLOW_CREDENTIALS = True #Might have to also ALLOW_HEADERS
+CORS_ALLOW_CREDENTIALS = True  # Might have to also ALLOW_HEADERS
