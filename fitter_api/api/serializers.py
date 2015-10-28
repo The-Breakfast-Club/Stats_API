@@ -22,8 +22,8 @@ class StatsSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'id', 'date_joined')
-        extra_kwargs = {'username': {'read_only': True},
+        fields = ('username', 'id', 'password')
+        extra_kwargs = {'username': {'write_only': True},
                         'password': {'write_only': True}}
 
     def create(self, validated_data):
