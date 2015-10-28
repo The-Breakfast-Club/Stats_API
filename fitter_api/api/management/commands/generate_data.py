@@ -34,6 +34,12 @@ def create_activities():
 
 def create_stats():
     for _ in range(500):
-        new_stat = Stats(activity=random.choice(Activity.objects.all()),
-                         number_of=random.randint(1, 20))
-        new_stat.save()
+        while True:
+            try:
+                new_stat = Stats(activity=random.choice(Activity.objects.all()),
+                                 number_of=random.randint(1, 20),
+                                 date=fake.date_time_between(start_date="-1y", end_date="now").date())
+                new_stat.save()
+                break
+            except:
+                continue
