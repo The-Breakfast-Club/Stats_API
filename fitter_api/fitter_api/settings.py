@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.CorsMiddleWare'
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -133,6 +134,11 @@ REST_FRAMEWORK = {
 
 
 if DEBUG:
-    CORS_ORIGIN_ALLOW_ALL = True
+    CORS_ORIGIN_ALLOW_ALL = True #while testing#
 else:
     CORS_ORIGIN_ALLOW_ALL = False
+#   CORS_ORIGIN_WHITELIST = (
+#             'firebase thing'
+# )
+
+CORS_ALLOW_CREDENTIALS = True #Might have to also ALLOW_HEADERS
